@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trabzon 2026 Ramazan İmsakiyesi</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
+body{background:#000;color:white;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:15px;}
+body::before{content:"";position:fixed;inset:0;background:url("background.jpg") center/cover no-repeat;opacity:.25;z-index:-1;}
+
+/* --- Header ve Logo --- */
+.header-bar{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:10px 20px;
+    background: rgba(0,0,0,0.6);
+    border: 2px solid #d4af37; 
+    border-radius:15px;
+    margin-bottom:15px;
+    max-width:600px;
+    width:100%;
+    justify-content:center;
+    position: relative;
+    overflow: hidden;
+    transition: background 2s linear;
+}
+.header-bar > *{position: relative; z-index:1;}
+
+.logo{
+    width:80px;
+    height:auto;
+    transition: transform 1.5s ease-in-out;
+}
+.logo:hover{
+    animation: logoBreath 3s infinite;
+}
+@keyframes logoBreath{
+    0%{transform: scale(1);}
+    50%{transform: scale(1.08);}
+    100%{transform: scale(1);}
+}
+
+/* --- Gradient hareketi için animasyon --- */
+.header-bar.animateGradient{
+    background-size: 200% 200%;
+    animation: gradientMove 60s linear infinite;
+}
+@keyframes gradientMove{
+    0%{background-position:0% 0%;}
+    25%{background-position:100% 0%;}
+    50%{background-position:100% 100%;}
+    75%{background-position:0% 100%;}
+    100%{background-position:0% 0%;}
+}
+
+.header-bar h1{font-size:22px;color:white;margin:0;white-space: nowrap;text-align:center;}
+
+/* --- Saat, bar ve badge --- */
+#clock{margin-bottom:10px;font-size:14px;opacity:.8;}
+.badge{background:linear-gradient(45deg,#d4af37,#ffcc66);color:#000;padding:6px 14px;border-radius:20px;font-weight:bold;margin-bottom:10px;}
+#countdown{margin:10px 0;font-size:16px;font-weight:bold;text-align:center;}
+.progress{width:100%;max-width:500px;height:10px;background:#333;border-radius:10px;overflow:hidden;margin-bottom:15px;}
+.bar{height:100%;width:0%;transition:width 1s linear;}
+.bar.imsak-bar{background: linear-gradient(90deg, #00ffff, #00aaff);}
+
+/* --- Tablo --- */
+table{width:100%;max-width:600px;border-collapse:collapse;font-size:13px;}
+th,td{padding:6px;text-align:center;}
+tr:nth-child(even){background:#111;}
+.active{background:#1e3a5f !important;border:2px solid #00ccff;}
+.completed{background:#1a4d2e !important;border:2px solid #00ff88;}
+.imsak-active{background:#005577 !important;border:2px solid #00ffff !important;animation: imsakGlow 1.5s infinite alternate;}
+@keyframes imsakGlow{0%{box-shadow:0 0 5px rgba(0,255,255,0.3);}50%{box-shadow:0 0 15px rgba(0,255,255,0.6);}100%{box-shadow:0 0 5px rgba(0,255,255,0.3);}}
+
+.ad-area{margin-top:25px;width:100%;max-width:600px;}
+.ad-area a{display:block;width:100%;background:#000;border-radius:12px;overflow:hidden;text-decoration:none;color:white;}
+.ad-box{position:relative;display:block;background:linear-gradient(145deg,#0f0f0f,#1a1a1a);border:2px solid #d4af37;border-radius:18px;padding:30px 20px;text-align:center;overflow:hidden;transition:.4s;backdrop-filter: blur(8px);}
+.ad-box::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.05),transparent 40%);opacity:.4;pointer-events:none;}
+.ad-box:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(212,175,55,.4);}
+.sponsor-badge{position:absolute;top:0;left:50%;transform:translateX(-50%);background:#d4af37;color:#000;padding:5px 15px;font-size:12px;font-weight:bold;border-radius:0 0 10px 10px;}
+.ad-logo{width:95px;margin:25px 0 10px 0;border-radius:50%;transition:transform .6s;}
+.ad-box:hover .ad-logo{transform:rotate(8deg) scale(1.05);}
+.ad-box h2{font-size:24px;color:#d4af37;margin-bottom:6px;}
+.ad-slogan{font-size:14px;opacity:.9;margin-bottom:12px;}
+.ad-info{font-size:13px;opacity:.75;margin-bottom:18px;line-height:1.5;}
+.btn{display:inline-flex;align-items:center;gap:6px;background:#d4af37;color:#000;padding:10px 20px;border-radius:25px;font-weight:bold;font-size:13px;transition:.3s;}
+.ad-box:hover .btn{background:#fff;}
+footer{margin-top:20px;font-size:12px;opacity:.6;}
+</style>
+</head>
+<body>
+
+<div class="header-bar">
+    <img src="logo.png" class="logo">
+    <h1>Trabzon 2026 Ramazan İmsakiyesi</h1>
+</div>
+
+<div id="clock"></div>
+<div class="badge" id="badge"></div>
+<div id="countdown"></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<table id="takvim">
+<tr>
+<th>Gün</th><th>Tarih</th><th>İmsak</th><th>İftar</th>
+</tr>
+</table>
+
+<div class="ad-area">
+<a href="https://www.instagram.com/saracderi1961" target="_blank" class="ad-box">
+<div class="sponsor-badge">Hayırlı Bereketli Ramazanlar</div>
+<img src="sarac-logo.png" class="ad-logo" alt="Sarac Deri Logo">
+<h2>Saraç Deri</h2>
+<p class="ad-slogan">Hakiki Deri Ürünler</p>
+<div class="ad-info">💼 Kemerkaya Mah. Uzun Sok. No:30/A – Trabzon <br>📞 0462 321 24 74 <br>🛍️ instagram.com/saracderi1961</div>
+<span class="btn">ÜRÜNLERİ KEŞFETMEK İÇİN TIKLA</span>
+</a>
+</div>
+
+<footer>NRAtölye © 2026</footer>
+
+<audio id="ezanAudio" src="ezan.mp3" preload="auto"></audio>
+
+<script>
+// --- Ramazan takvimi ---
+const startDate = new Date(2026,1,19);
+const endDate = new Date(2026,2,20,23,59,59);
+const ramazan = [
+  {g:1,t:"19 Şubat Perşembe",ims:"05:41",ift:"18:05"},
+  {g:2,t:"20 Şubat Cuma",ims:"05:40",ift:"18:06"},
+  {g:3,t:"21 Şubat Cumartesi",ims:"05:38",ift:"18:07"},
+  {g:4,t:"22 Şubat Pazar",ims:"05:37",ift:"18:08"},
+  {g:5,t:"23 Şubat Pazartesi",ims:"05:36",ift:"18:10"},
+  {g:6,t:"24 Şubat Salı",ims:"05:35",ift:"18:11"},
+  {g:7,t:"25 Şubat Çarşamba",ims:"05:33",ift:"18:12"},
+  {g:8,t:"26 Şubat Perşembe",ims:"05:32",ift:"18:13"},
+  {g:9,t:"27 Şubat Cuma",ims:"05:30",ift:"18:14"},
+  {g:10,t:"28 Şubat Cumartesi",ims:"05:29",ift:"18:15"},
+  {g:11,t:"1 Mart Pazar",ims:"05:27",ift:"18:17"},
+  {g:12,t:"2 Mart Pazartesi",ims:"05:26",ift:"18:18"},
+  {g:13,t:"3 Mart Salı",ims:"05:24",ift:"18:19"},
+  {g:14,t:"4 Mart Çarşamba",ims:"05:23",ift:"18:20"},
+  {g:15,t:"5 Mart Perşembe",ims:"05:21",ift:"18:22"},
+  {g:16,t:"6 Mart Cuma",ims:"05:19",ift:"18:23"},
+  {g:17,t:"7 Mart Cumartesi",ims:"05:18",ift:"18:24"},
+  {g:18,t:"8 Mart Pazar",ims:"05:16",ift:"18:25"},
+  {g:19,t:"9 Mart Pazartesi",ims:"05:15",ift:"18:27"},
+  {g:20,t:"10 Mart Salı",ims:"05:13",ift:"18:28"},
+  {g:21,t:"11 Mart Çarşamba",ims:"05:11",ift:"18:30"},
+  {g:22,t:"12 Mart Perşembe",ims:"05:09",ift:"18:31"},
+  {g:23,t:"13 Mart Cuma",ims:"05:08",ift:"18:33"},
+  {g:24,t:"14 Mart Cumartesi",ims:"05:06",ift:"18:34"},
+  {g:25,t:"15 Mart Pazar",ims:"05:04",ift:"18:36"},
+  {g:26,t:"16 Mart Pazartesi",ims:"05:03",ift:"18:37"},
+  {g:27,t:"17 Mart Salı",ims:"05:01",ift:"18:39"},
+  {g:28,t:"18 Mart Çarşamba",ims:"04:59",ift:"18:40"},
+  {g:29,t:"19 Mart Perşembe",ims:"04:57",ift:"18:42"},
+  {g:30,t:"20 Mart Cuma",ims:"04:56",ift:"18:44"}
+];
+
+const table = document.getElementById("takvim");
+ramazan.forEach(r=>{
+    let row = table.insertRow();
+    row.innerHTML=`<td>${r.g}</td><td>${r.t}</td><td>${r.ims}</td><td>${r.ift}</td>`;
+});
+
+// --- Günlük saat ve bar güncelleme ---
+let ezanCaldi = false;
+let lastDay = -1;
+const ezanAudio = document.getElementById("ezanAudio");
+
+function update(){
+    let now = new Date();
+    document.getElementById("clock").innerText = "Online Saat: " + now.toLocaleTimeString("tr-TR");
+
+    if(now < startDate){
+        let diff = startDate - now;
+        let days = Math.floor(diff / (1000*60*60*24));
+        let hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+        let minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+        document.getElementById("countdown").innerText = `Ramazan’a ${days} gün ${hours} saat ${minutes} dk kaldı`;
+        document.getElementById("badge").innerText="Ramazan Henüz Başlamadı";
+        document.getElementById("bar").style.width="0%";
+        document.getElementById("bar").classList.remove("imsak-bar");
+        return;
+    }
+
+    if(now > endDate){
+        document.getElementById("countdown").innerText="Ramazan Sona Erdi 🌙";
+        document.getElementById("badge").innerText="Ramazan 2026 Tamamlandı";
+        document.getElementById("bar").style.width="100%";
+        document.getElementById("bar").classList.remove("imsak-bar");
+        return;
+    }
+
+    let dayIndex = Math.floor((now - startDate)/(1000*60*60*24));
+    if(dayIndex !== lastDay){
+        ezanCaldi = false;
+        lastDay = dayIndex;
+    }
+    if(dayIndex<0) dayIndex=0;
+    if(dayIndex>=ramazan.length) dayIndex=ramazan.length-1;
+
+    let today = ramazan[dayIndex];
+    document.getElementById("badge").innerText = "Ramazan " + today.g + ". Gün";
+
+    let imsParts = today.ims.split(":");
+    let iftParts = today.ift.split(":");
+    let ims = new Date(now.getFullYear(),now.getMonth(),now.getDate(),imsParts[0],imsParts[1]);
+    let ift = new Date(now.getFullYear(),now.getMonth(),now.getDate(),iftParts[0],iftParts[1]);
+
+    let rows = document.querySelectorAll("#takvim tr");
+    rows.forEach(r => { r.classList.remove("active","completed","imsak-active"); });
+    let row = rows[dayIndex+1];
+
+    if(now >= ift){
+        row.classList.add("completed");
+        document.getElementById("countdown").innerText="İftar Tamamlandı ✓";
+        document.getElementById("bar").style.width="100%";
+        document.getElementById("bar").classList.remove("imsak-bar");
+        if(!ezanCaldi){
+            ezanAudio.play().catch(()=>{});
+            ezanCaldi = true;
+        }
+    }
+    else if(now >= ims){
+        row.classList.add("active");
+        let total = ift - ims;
+        let passed = now - ims;
+        let percent = (passed/total)*100;
+        document.getElementById("bar").style.width = percent + "%";
+        document.getElementById("bar").classList.remove("imsak-bar");
+
+        let diff = ift - now;
+        let h = Math.floor(diff/3600000);
+        let m = Math.floor((diff%3600000)/60000);
+        let s = Math.floor((diff%60000)/1000);
+        document.getElementById("countdown").innerText = `İftara Kalan: ${h} saat ${m} dk ${s} sn`;
+    }
+    else{
+        row.classList.add("imsak-active");
+        document.getElementById("bar").classList.add("imsak-bar");
+
+        let diff = ims - now;
+        let h = Math.floor(diff/3600000);
+        let m = Math.floor((diff%3600000)/60000);
+        let s = Math.floor((diff%60000)/1000);
+        document.getElementById("countdown").innerText = `Sahura Kalan: ${h} saat ${m} dk ${s} sn`;
+    }
+}
+
+// --- Gün ışığı header animasyonu (hem yatay hem dikey kayma) ---
+function updateHeaderGradient() {
+    const now = new Date();
+    const hour = now.getHours();
+    let gradient = "";
+
+    if(hour >= 6 && hour < 10){ // Sabah
+        gradient = "linear-gradient(45deg, #FFD97D, #FFFACD, #FFEBCD)";
+    } else if(hour >= 10 && hour < 16){ // Öğle
+        gradient = "linear-gradient(45deg, #FFFFFF, #E0F7FF, #D0EEFF)";
+    } else if(hour >= 16 && hour < 19){ // Akşam
+        gradient = "linear-gradient(45deg, #FFB347, #FFCC66, #FFD780)";
+    } else { // Gece
+        gradient = "linear-gradient(45deg, #0b0f2c, #1c1f3f, #2c3e50)";
+    }
+
+    const header = document.querySelector(".header-bar");
+    header.style.background = gradient;
+    header.classList.add("animateGradient");
+}
+
+// --- Intervalller ---
+setInterval(update,1000);
+update();
+setInterval(updateHeaderGradient,60000);
+updateHeaderGradient();
+</script>
+
+</body>
+</html>
