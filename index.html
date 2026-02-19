@@ -132,71 +132,74 @@ body{
 }
 
 /* --- Alt sponsor alanı --- */
-.ad-area{
+.ad-area {
     margin-top: 25px;
     width: 100%;
     max-width: 600px;
     position: relative;
-    z-index:3;
+    z-index: 999; /* üstte görünmesi için yüksek z-index */
 }
 
-.ad-area a{
+.ad-area a {
     display: block;
     width: 100%;
-    background: rgba(0,0,0,0.7);
-    border-radius: 12px;
-    overflow: hidden;
     text-decoration: none;
     color: white;
-    transition: .3s;
     position: relative;
+    z-index: 999;
 }
 
-.ad-box{
-    display: block;
-    background: rgba(0,0,0,0.7);
+.ad-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0,0,0,0.7); /* %70 şeffaf siyah */
     border: 2px solid #d4af37;
     border-radius: 18px;
     padding: 30px 20px;
     text-align: center;
     overflow: hidden;
-    transition: .4s;
+    transition: transform 0.4s, box-shadow 0.4s;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.ad-box:hover{
+.ad-box:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(212,175,55,.4);
+    box-shadow: 0 15px 40px rgba(212,175,55,0.4);
 }
 
-.ad-logo{
+.ad-logo {
     width: 95px;
-    margin: 25px 0 10px 0;
     border-radius: 50%;
-    transition: transform .6s;
+    margin: 25px 0 10px 0;
+    transition: transform 0.6s;
 }
 
-.ad-box:hover .ad-logo{
+.ad-box:hover .ad-logo {
     transform: rotate(8deg) scale(1.05);
 }
 
-.ad-box h2{
+.ad-box h2 {
     font-size: 24px;
     color: #d4af37;
-    margin-bottom: 6px;
+    margin: 6px 0;
 }
 
-.ad-slogan{
+.ad-slogan {
     font-size: 14px;
-    opacity: .9;
+    opacity: 0.9;
     margin-bottom: 12px;
 }
 
-.ad-info{
+.ad-info {
     font-size: 13px;
-    opacity: .75;
-    margin-bottom: 18px;
-    line-height:1.5;
+    opacity: 0.75;
+    line-height: 1.5;
+    margin-bottom: 0;
 }
+
 
 /* --- Footer --- */
 footer{
@@ -264,7 +267,7 @@ footer{
 function update(){
     let now = new Date();
     document.getElementById("clock").innerText = "Online Saat: " + now.toLocaleTimeString("tr-TR");
-    document.querySelector(".badge").innerText = "Hayırlı Ramazanlar 🌙";
+    document.querySelector(".badge").innerText = "Hayırlı Ramazanlar ☪︎";
 }
 setInterval(update,1000);
 update();
