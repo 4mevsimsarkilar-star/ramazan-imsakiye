@@ -62,6 +62,47 @@ body{
 /* --- Saat ve badge --- */
 #clock{margin-bottom:10px;font-size:14px;opacity:.9;}
 .badge{background:linear-gradient(45deg,#d4af37,#ffcc66);color:#000;padding:6px 14px;border-radius:20px;font-weight:bold;margin-bottom:15px;text-align:center;}
+/* --- Saat çerçeve ve animasyonlar --- */
+/* --- Neon ışık akışı animasyonu --- */
+#clock-wrapper {
+    display:inline-block;
+    padding:12px 25px;
+    border: 2px solid #00ffff;       
+    border-radius:15px;
+    background: rgba(0,0,0,0.6);     
+    box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff inset;
+    margin-bottom:10px;
+    animation: pulseGlow 1.5s infinite alternate, neonFlow 3s linear infinite;
+}
+
+@keyframes neonFlow {
+    0% { box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff inset; }
+    50% { box-shadow: 0 0 25px #00ffff, 0 0 50px #00ffff inset; }
+    100% { box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff inset; }
+}
+
+
+#clock{
+    font-size:18px;
+    color:#00ffff;
+    font-weight:bold;
+    animation: blink 1s infinite;  /* Yanıp sönme efekti */
+    text-align:center;
+}
+
+/* --- Yanıp sönme animasyonu --- */
+@keyframes blink{
+    0%{opacity:1;}
+    50%{opacity:0.4;}
+    100%{opacity:1;}
+}
+
+/* --- Çerçeve ışık puls efekti --- */
+@keyframes pulseGlow{
+    0%{box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff inset;}
+    50%{box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff inset;}
+    100%{box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff inset;}
+}
 
 /* --- Diyanet Butonu --- */
 .progress{
@@ -135,8 +176,13 @@ footer{margin-top:20px;font-size:12px;opacity:.6;}
     <h1>Trabzon 2026 Ramazan İmsakiyesi</h1>
 </div>
 
-<div id="clock"></div>
+<!-- Saat çerçeve ve animasyonlu neon -->
+<div id="clock-wrapper">
+    <div id="clock"></div>
+</div>
 <div class="badge" id="badge"></div>
+
+
 
 <!-- Diyanet Butonu -->
 <div class="progress">
