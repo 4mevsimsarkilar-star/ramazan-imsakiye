@@ -6,8 +6,19 @@
 <title>Trabzon 2026 Ramazan İmsakiyesi</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
-body{background:#000;color:white;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:15px;}
-body::before{content:"";position:fixed;inset:0;background:url("background.jpg") center/cover no-repeat;opacity:.25;z-index:-1;}
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:15px;
+    color:white;
+    /* Siyah zemin + şeffaf gradyan + arka plan resmi */
+    background:
+      linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+      url('trabzon1.jpg') center/cover no-repeat;
+    transition: background 1s ease-in-out;
+}
 
 /* --- Header ve Logo --- */
 .header-bar{
@@ -27,66 +38,59 @@ body::before{content:"";position:fixed;inset:0;background:url("background.jpg") 
     transition: background 2s linear;
 }
 .header-bar > *{position: relative; z-index:1;}
-
 .logo{
     width:80px;
     height:auto;
     transition: transform 1.5s ease-in-out;
 }
-.logo:hover{
-    animation: logoBreath 3s infinite;
-}
-@keyframes logoBreath{
-    0%{transform: scale(1);}
-    50%{transform: scale(1.08);}
-    100%{transform: scale(1);}
-}
-
-/* --- Gradient hareketi için animasyon --- */
-.header-bar.animateGradient{
-    background-size: 200% 200%;
-    animation: gradientMove 60s linear infinite;
-}
-@keyframes gradientMove{
-    0%{background-position:0% 0%;}
-    25%{background-position:100% 0%;}
-    50%{background-position:100% 100%;}
-    75%{background-position:0% 100%;}
-    100%{background-position:0% 0%;}
-}
-
+.logo:hover{animation: logoBreath 3s infinite;}
+@keyframes logoBreath{0%{transform: scale(1);}50%{transform: scale(1.08);}100%{transform: scale(1);}}
 .header-bar h1{font-size:22px;color:white;margin:0;white-space: nowrap;text-align:center;}
 
-/* --- Saat, bar ve badge --- */
+/* --- Saat ve badge --- */
 #clock{margin-bottom:10px;font-size:14px;opacity:.8;}
-.badge{background:linear-gradient(45deg,#d4af37,#ffcc66);color:#000;padding:6px 14px;border-radius:20px;font-weight:bold;margin-bottom:10px;}
-#countdown{margin:10px 0;font-size:16px;font-weight:bold;text-align:center;}
-.progress{width:100%;max-width:500px;height:10px;background:#333;border-radius:10px;overflow:hidden;margin-bottom:15px;}
-.bar{height:100%;width:0%;transition:width 1s linear;}
-.bar.imsak-bar{background: linear-gradient(90deg, #00ffff, #00aaff);}
+.badge{background:linear-gradient(45deg,#d4af37,#ffcc66);color:#000;padding:6px 14px;border-radius:20px;font-weight:bold;margin-bottom:15px;text-align:center;}
 
-/* --- Tablo --- */
-table{width:100%;max-width:600px;border-collapse:collapse;font-size:13px;}
-th,td{padding:6px;text-align:center;}
-tr:nth-child(even){background:#111;}
-.active{background:#1e3a5f !important;border:2px solid #00ccff;}
-.completed{background:#1a4d2e !important;border:2px solid #00ff88;}
-.imsak-active{background:#005577 !important;border:2px solid #00ffff !important;animation: imsakGlow 1.5s infinite alternate;}
-@keyframes imsakGlow{0%{box-shadow:0 0 5px rgba(0,255,255,0.3);}50%{box-shadow:0 0 15px rgba(0,255,255,0.6);}100%{box-shadow:0 0 5px rgba(0,255,255,0.3);}}
+/* --- Diyanet Butonu --- */
+.progress{width:100%;max-width:500px;margin-bottom:25px;}
+.progress .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    gap:6px;
+    background:#d4af37;
+    color:#000;
+    padding:15px;
+    border-radius:25px;
+    font-weight:bold;
+    font-size:16px;
+    text-decoration:none;
+    transition:.3s;
+    text-align:center;
+}
+.progress .btn:hover{
+    background:#fff;
+    box-shadow:0 0 15px #d4af37, 0 0 30px #00ffff inset;
+    transform:scale(1.05);
+}
 
-.ad-area{margin-top:25px;width:100%;max-width:600px;}
-.ad-area a{display:block;width:100%;background:#000;border-radius:12px;overflow:hidden;text-decoration:none;color:white;}
-.ad-box{position:relative;display:block;background:linear-gradient(145deg,#0f0f0f,#1a1a1a);border:2px solid #d4af37;border-radius:18px;padding:30px 20px;text-align:center;overflow:hidden;transition:.4s;backdrop-filter: blur(8px);}
-.ad-box::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.05),transparent 40%);opacity:.4;pointer-events:none;}
+/* --- Alt sponsor alanı --- */
+.ad-area{
+    margin-top:25px;width:100%;max-width:600px;
+}
+.ad-area a{
+    display:block;width:100%;background:#111;border-radius:12px;overflow:hidden;text-decoration:none;color:white;
+}
+.ad-box{
+    position:relative;display:block;background:#111;border:2px solid #d4af37;border-radius:18px;padding:30px 20px;text-align:center;overflow:hidden;transition:.4s;
+}
 .ad-box:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(212,175,55,.4);}
-.sponsor-badge{position:absolute;top:0;left:50%;transform:translateX(-50%);background:#d4af37;color:#000;padding:5px 15px;font-size:12px;font-weight:bold;border-radius:0 0 10px 10px;}
 .ad-logo{width:95px;margin:25px 0 10px 0;border-radius:50%;transition:transform .6s;}
 .ad-box:hover .ad-logo{transform:rotate(8deg) scale(1.05);}
 .ad-box h2{font-size:24px;color:#d4af37;margin-bottom:6px;}
 .ad-slogan{font-size:14px;opacity:.9;margin-bottom:12px;}
 .ad-info{font-size:13px;opacity:.75;margin-bottom:18px;line-height:1.5;}
-.btn{display:inline-flex;align-items:center;gap:6px;background:#d4af37;color:#000;padding:10px 20px;border-radius:25px;font-weight:bold;font-size:13px;transition:.3s;}
-.ad-box:hover .btn{background:#fff;}
 footer{margin-top:20px;font-size:12px;opacity:.6;}
 </style>
 </head>
@@ -99,148 +103,63 @@ footer{margin-top:20px;font-size:12px;opacity:.6;}
 
 <div id="clock"></div>
 <div class="badge" id="badge"></div>
-<div id="countdown"></div>
-<div class="progress"><div class="bar" id="bar"></div></div>
 
-<table id="takvim">
-<tr>
-<th>Gün</th><th>Tarih</th><th>İmsak</th><th>İftar</th>
-</tr>
-</table>
+<!-- Diyanet Butonu -->
+<div class="progress">
+    <a href="https://namazvakitleri.diyanet.gov.tr/tr-TR/9905/trabzon-icin-namaz-vakti" target="_blank" class="btn">
+        Diyanet Ramazan Takvimi İçin TIKLA
+    </a>
+</div>
 
+<!-- Alt sponsor alanı -->
 <div class="ad-area">
-<a href="https://www.instagram.com/saracderi1961" target="_blank" class="ad-box">
-<div class="sponsor-badge">Hayırlı Bereketli Ramazanlar</div>
-<img src="saraclogo.png" class="ad-logo" alt="Sarac Deri Logo">
-<h2>Saraç Deri</h2>
-<p class="ad-slogan">Hakiki Deri Ürünler</p>
-<div class="ad-info">💼 Kemerkaya Mah. Uzun Sok. No:30/A – Trabzon <br>📞 0462 321 24 74 <br>🛍️ instagram.com/saracderi1961</div>
-<span class="btn">ÜRÜNLERİ KEŞFETMEK İÇİN TIKLA</span>
-</a>
+    <a href="https://www.instagram.com/saracderi1961" target="_blank" class="ad-box">
+        <img src="saraclogo.png" class="ad-logo" alt="Sarac Deri Logo">
+        <h2>Saraç Deri</h2>
+        <p class="ad-slogan">Hakiki Deri Ürünler</p>
+        <div class="ad-info">💼 Kemerkaya Mah. Uzun Sok. No:30/A – Trabzon <br>📞 0462 321 24 74 <br>🛍️ instagram.com/saracderi1961</div>
+    </a>
 </div>
 
 <footer>NRAtölye © 2026</footer>
 
-<audio id="ezanAudio" src="ezan.mp3" preload="auto"></audio>
-
 <script>
-const table = document.getElementById("takvim");
-ramazan.forEach(r=>{
-    let row = table.insertRow();
-    row.innerHTML=`<td>${r.g}</td><td>${r.t}</td><td>${r.ims}</td><td>${r.ift}</td>`;
-});
-
-// --- Günlük saat ve bar güncelleme ---
-let ezanCaldi = false;
-let lastDay = -1;
-const ezanAudio = document.getElementById("ezanAudio");
-
+// --- Saat ve badge ---
 function update(){
     let now = new Date();
     document.getElementById("clock").innerText = "Online Saat: " + now.toLocaleTimeString("tr-TR");
-
-    if(now < startDate){
-        let diff = startDate - now;
-        let days = Math.floor(diff / (1000*60*60*24));
-        let hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-        let minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
-        document.getElementById("countdown").innerText = `Ramazan’a ${days} gün ${hours} saat ${minutes} dk kaldı`;
-        document.getElementById("badge").innerText="Ramazan Henüz Başlamadı";
-        document.getElementById("bar").style.width="0%";
-        document.getElementById("bar").classList.remove("imsak-bar");
-        return;
-    }
-
-    if(now > endDate){
-        document.getElementById("countdown").innerText="Ramazan Sona Erdi 🌙";
-        document.getElementById("badge").innerText="Ramazan 2026 Tamamlandı";
-        document.getElementById("bar").style.width="100%";
-        document.getElementById("bar").classList.remove("imsak-bar");
-        return;
-    }
-
-    let dayIndex = Math.floor((now - startDate)/(1000*60*60*24));
-    if(dayIndex !== lastDay){
-        ezanCaldi = false;
-        lastDay = dayIndex;
-    }
-    if(dayIndex<0) dayIndex=0;
-    if(dayIndex>=ramazan.length) dayIndex=ramazan.length-1;
-
-    let today = ramazan[dayIndex];
-    document.getElementById("badge").innerText = "Ramazan " + today.g + ". Gün";
-
-    let imsParts = today.ims.split(":");
-    let iftParts = today.ift.split(":");
-    let ims = new Date(now.getFullYear(),now.getMonth(),now.getDate(),imsParts[0],imsParts[1]);
-    let ift = new Date(now.getFullYear(),now.getMonth(),now.getDate(),iftParts[0],iftParts[1]);
-
-    let rows = document.querySelectorAll("#takvim tr");
-    rows.forEach(r => { r.classList.remove("active","completed","imsak-active"); });
-    let row = rows[dayIndex+1];
-
-    if(now >= ift){
-        row.classList.add("completed");
-        document.getElementById("countdown").innerText="İftar Tamamlandı ✓";
-        document.getElementById("bar").style.width="100%";
-        document.getElementById("bar").classList.remove("imsak-bar");
-        if(!ezanCaldi){
-            ezanAudio.play().catch(()=>{});
-            ezanCaldi = true;
-        }
-    }
-    else if(now >= ims){
-        row.classList.add("active");
-        let total = ift - ims;
-        let passed = now - ims;
-        let percent = (passed/total)*100;
-        document.getElementById("bar").style.width = percent + "%";
-        document.getElementById("bar").classList.remove("imsak-bar");
-
-        let diff = ift - now;
-        let h = Math.floor(diff/3600000);
-        let m = Math.floor((diff%3600000)/60000);
-        let s = Math.floor((diff%60000)/1000);
-        document.getElementById("countdown").innerText = `İftara Kalan: ${h} saat ${m} dk ${s} sn`;
-    }
-    else{
-        row.classList.add("imsak-active");
-        document.getElementById("bar").classList.add("imsak-bar");
-
-        let diff = ims - now;
-        let h = Math.floor(diff/3600000);
-        let m = Math.floor((diff%3600000)/60000);
-        let s = Math.floor((diff%60000)/1000);
-        document.getElementById("countdown").innerText = `Sahura Kalan: ${h} saat ${m} dk ${s} sn`;
-    }
+    document.querySelector(".badge").innerText = "Hayırlı Ramazanlar 🌙";
 }
+setInterval(update,1000);
+update();
 
-// --- Gün ışığı header animasyonu (hem yatay hem dikey kayma) ---
+// --- Header gradient ---
 function updateHeaderGradient() {
     const now = new Date();
     const hour = now.getHours();
     let gradient = "";
-
-    if(hour >= 6 && hour < 10){ // Sabah
-        gradient = "linear-gradient(45deg, #FFD97D, #FFFACD, #FFEBCD)";
-    } else if(hour >= 10 && hour < 16){ // Öğle
-        gradient = "linear-gradient(45deg, #FFFFFF, #E0F7FF, #D0EEFF)";
-    } else if(hour >= 16 && hour < 19){ // Akşam
-        gradient = "linear-gradient(45deg, #FFB347, #FFCC66, #FFD780)";
-    } else { // Gece
-        gradient = "linear-gradient(45deg, #0b0f2c, #1c1f3f, #2c3e50)";
-    }
-
+    if(hour >= 6 && hour < 10) gradient="linear-gradient(45deg, #FFD97D, #FFFACD, #FFEBCD)";
+    else if(hour >= 10 && hour < 16) gradient="linear-gradient(45deg, #FFFFFF, #E0F7FF, #D0EEFF)";
+    else if(hour >= 16 && hour < 19) gradient="linear-gradient(45deg, #FFB347, #FFCC66, #FFD780)";
+    else gradient="linear-gradient(45deg, #0b0f2c, #1c1f3f, #2c3e50)";
     const header = document.querySelector(".header-bar");
     header.style.background = gradient;
-    header.classList.add("animateGradient");
 }
-
-// --- Intervalller ---
-setInterval(update,1000);
-update();
 setInterval(updateHeaderGradient,60000);
 updateHeaderGradient();
+
+// --- Arka plan slideshow (5 saniye geçiş) ---
+const backgrounds = [
+    'trabzon1.jpg','trabzon2.jpg','trabzon3.jpg','trabzon4.jpg','trabzon5.jpg',
+    'trabzon6.jpg','trabzon7.jpg','trabzon8.jpg','trabzon9.jpg','trabzon10.jpg'
+];
+let currentBG = 0;
+function changeBackground(){
+    document.body.style.background = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${backgrounds[currentBG]}') center/cover no-repeat`;
+    currentBG = (currentBG + 1) % backgrounds.length;
+}
+setInterval(changeBackground,5000); // 5 saniye
+changeBackground();
 </script>
 
 </body>
