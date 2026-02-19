@@ -158,7 +158,17 @@ body{
 .ad-box h2{font-size:24px;color:#d4af37;margin-bottom:6px;}
 .ad-slogan{font-size:14px;opacity:.9;margin-bottom:12px;}
 .ad-info{font-size:13px;opacity:.75;margin-bottom:18px;line-height:1.5;}
-footer{margin-top:20px;font-size:12px;opacity:.6;}
+footer{
+    margin-top:20px;
+    font-size:12px;
+    opacity:.6;
+    color:white;             /* mutlaka beyaz olsun */
+    position: relative;      /* z-index çalışması için gerekli */
+    z-index: 2;              /* üstte görünmesini sağlar */
+    text-align: center;
+    padding: 10px 0;
+}
+
 </style>
 </head>
 <body>
