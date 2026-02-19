@@ -13,6 +13,7 @@ body{
     align-items:center;
     padding:15px;
     color:white;
+    background: rgba(0,0,0,0.7);
     position:relative;
     overflow:hidden;
 }
@@ -44,7 +45,7 @@ body{
     position: relative;
     overflow: hidden;
     transition: background 1s linear;
-    z-index:1;
+    z-index:3;
 }
 .header-bar > *{position: relative; z-index:1;}
 .logo{
@@ -56,6 +57,10 @@ body{
 @keyframes logoBreath{0%{transform: scale(1);}50%{transform: scale(1.08);}100%{transform: scale(1);}}
 .header-bar h1{font-size:22px;color:white;margin:0;white-space: nowrap;text-align:center;}
 
+/* --- Saat ve badge --- */
+#clock{margin-bottom:10px;font-size:14px;opacity:.9;}
+.badge{background:linear-gradient(45deg,#d4af37,#ffcc66);color:#000;padding:6px 14px;border-radius:20px;font-weight:bold;margin-bottom:15px;text-align:center;}
+
 /* --- Saat çerçeve ve animasyonlar --- */
 #clock-wrapper {
     display:inline-block;
@@ -66,24 +71,30 @@ body{
     box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff inset;
     margin-bottom:10px;
     animation: pulseGlow 1.5s infinite alternate, neonFlow 3s linear infinite;
+    position: relative;
+    z-index:3;
 }
+
 @keyframes neonFlow {
     0% { box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff inset; }
     50% { box-shadow: 0 0 25px #00ffff, 0 0 50px #00ffff inset; }
     100% { box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff inset; }
 }
+
 #clock{
     font-size:18px;
     color:#00ffff;
     font-weight:bold;
-    animation: blink 1s infinite;
+    animation: blink 1s infinite;  /* Yanıp sönme efekti */
     text-align:center;
 }
+
 @keyframes blink{
     0%{opacity:1;}
     50%{opacity:0.4;}
     100%{opacity:1;}
 }
+
 @keyframes pulseGlow{
     0%{box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff inset;}
     50%{box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff inset;}
@@ -95,6 +106,8 @@ body{
     width:100%;
     max-width:500px;
     margin-bottom:25px;
+    position: relative;
+    z-index:3;
 }
 .progress .btn{
     display:inline-flex;
@@ -124,49 +137,77 @@ body{
     width: 100%;
     max-width: 600px;
     position: relative;
-    z-index: 2;
+    z-index:3;
 }
+
 .ad-area a{
-    display:block;
-    width:100%;
+    display: block;
+    width: 100%;
     background: rgba(0,0,0,0.7);
-    border-radius:12px;
-    overflow:hidden;
-    text-decoration:none;
-    color:white;
-    transition:.3s;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: white;
+    transition: .3s;
     position: relative;
-    z-index:2;
 }
+
 .ad-box{
-    position:relative;
-    display:block;
+    display: block;
     background: rgba(0,0,0,0.7);
-    border:2px solid #d4af37;
-    border-radius:18px;
-    padding:30px 20px;
-    text-align:center;
-    overflow:hidden;
-    transition:.4s;
+    border: 2px solid #d4af37;
+    border-radius: 18px;
+    padding: 30px 20px;
+    text-align: center;
+    overflow: hidden;
+    transition: .4s;
 }
+
 .ad-box:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 40px rgba(212,175,55,.4);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(212,175,55,.4);
 }
-.ad-logo{width:95px;margin:25px 0 10px 0;border-radius:50%;transition:transform .6s;}
-.ad-box:hover .ad-logo{transform:rotate(8deg) scale(1.05);}
-.ad-box h2{font-size:24px;color:#d4af37;margin-bottom:6px;}
-.ad-slogan{font-size:14px;opacity:.9;margin-bottom:12px;}
-.ad-info{font-size:13px;opacity:.75;margin-bottom:18px;line-height:1.5;}
+
+.ad-logo{
+    width: 95px;
+    margin: 25px 0 10px 0;
+    border-radius: 50%;
+    transition: transform .6s;
+}
+
+.ad-box:hover .ad-logo{
+    transform: rotate(8deg) scale(1.05);
+}
+
+.ad-box h2{
+    font-size: 24px;
+    color: #d4af37;
+    margin-bottom: 6px;
+}
+
+.ad-slogan{
+    font-size: 14px;
+    opacity: .9;
+    margin-bottom: 12px;
+}
+
+.ad-info{
+    font-size: 13px;
+    opacity: .75;
+    margin-bottom: 18px;
+    line-height:1.5;
+}
+
+/* --- Footer --- */
 footer{
     margin-top:20px;
     font-size:12px;
-    opacity:.6;
-    color:white;             /* mutlaka beyaz olsun */
-    position: relative;      /* z-index çalışması için gerekli */
-    z-index: 2;              /* üstte görünmesini sağlar */
-    text-align: center;
-    padding: 10px 0;
+    opacity:.9;
+    color:white;
+    position: relative;
+    z-index:3;
+    text-align:center;
+    padding:10px 0;
 }
 
 </style>
@@ -192,6 +233,7 @@ footer{
     <h1>Trabzon 2026 Ramazan İmsakiyesi</h1>
 </div>
 
+<!-- Saat çerçeve ve animasyonlu neon -->
 <div id="clock-wrapper">
     <div id="clock"></div>
 </div>
@@ -211,8 +253,8 @@ footer{
         <h2>Saraç Deri</h2>
         <p class="ad-slogan">Hakiki Deri Ürünler</p>
         <div class="ad-info">💼 Kemerkaya Mah. Uzun Sok. No:30/A – Trabzon <br>📞 0462 321 24 74 <br>🛍️ instagram.com/saracderi1961</div>
-   <span class="btn">ÜRÜNLERİ KEŞFETMEK İÇİN TIKLA</span>
-</a>
+        <span class="btn">ÜRÜNLERİ KEŞFETMEK İÇİN TIKLA</span>
+    </a>
 </div>
 
 <footer>NRAtölye © 2026</footer>
@@ -235,7 +277,7 @@ setInterval(()=>{
     slides[current].style.opacity = 0;
     current = (current + 1) % slides.length;
     slides[current].style.opacity = 1;
-},5000); // 5 saniye
+},5000);
 </script>
 
 </body>
