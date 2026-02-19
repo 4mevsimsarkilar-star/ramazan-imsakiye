@@ -152,8 +152,10 @@ footer{margin-top:20px;font-size:12px;opacity:.6;}
         <h2>Saraç Deri</h2>
         <p class="ad-slogan">Hakiki Deri Ürünler</p>
         <div class="ad-info">💼 Kemerkaya Mah. Uzun Sok. No:30/A – Trabzon <br>📞 0462 321 24 74 <br>🛍️ instagram.com/saracderi1961</div>
-    </a>
+   <span class="btn">ÜRÜNLERİ KEŞFETMEK İÇİN TIKLA</span>
+</a>
 </div>
+
 
 <footer>NRAtölye © 2026</footer>
 
@@ -167,20 +169,7 @@ function update(){
 setInterval(update,1000);
 update();
 
-// --- Header gradient ---
-function updateHeaderGradient() {
-    const now = new Date();
-    const hour = now.getHours();
-    let gradient = "";
-    if(hour >= 6 && hour < 10) gradient="linear-gradient(45deg, #FFD97D, #FFFACD, #FFEBCD)";
-    else if(hour >= 10 && hour < 16) gradient="linear-gradient(45deg, #FFFFFF, #E0F7FF, #D0EEFF)";
-    else if(hour >= 16 && hour < 19) gradient="linear-gradient(45deg, #FFB347, #FFCC66, #FFD780)";
-    else gradient="linear-gradient(45deg, #0b0f2c, #1c1f3f, #2c3e50)";
-    const header = document.querySelector(".header-bar");
-    header.style.background = gradient;
-}
-setInterval(updateHeaderGradient,60000);
-updateHeaderGradient();
+
 
 // --- Arka plan fade slideshow ---
 const slides = document.querySelectorAll('.bg-slide');
