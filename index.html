@@ -13,8 +13,6 @@ body{
     align-items:center;
     padding:15px;
     color:white;
-   background: rgba(0,0,0,0.7);
-
     position:relative;
     overflow:hidden;
 }
@@ -37,7 +35,6 @@ body{
     gap:15px;
     padding:10px 20px;
     background: rgba(0,0,0,0.7);
-
     border: 2px solid #d4af37; 
     border-radius:15px;
     margin-bottom:15px;
@@ -59,11 +56,7 @@ body{
 @keyframes logoBreath{0%{transform: scale(1);}50%{transform: scale(1.08);}100%{transform: scale(1);}}
 .header-bar h1{font-size:22px;color:white;margin:0;white-space: nowrap;text-align:center;}
 
-/* --- Saat ve badge --- */
-#clock{margin-bottom:10px;font-size:14px;opacity:.9;}
-.badge{background:linear-gradient(45deg,#d4af37,#ffcc66);color:#000;padding:6px 14px;border-radius:20px;font-weight:bold;margin-bottom:15px;text-align:center;}
 /* --- Saat çerçeve ve animasyonlar --- */
-/* --- Neon ışık akışı animasyonu --- */
 #clock-wrapper {
     display:inline-block;
     padding:12px 25px;
@@ -74,30 +67,23 @@ body{
     margin-bottom:10px;
     animation: pulseGlow 1.5s infinite alternate, neonFlow 3s linear infinite;
 }
-
 @keyframes neonFlow {
     0% { box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff inset; }
     50% { box-shadow: 0 0 25px #00ffff, 0 0 50px #00ffff inset; }
     100% { box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff inset; }
 }
-
-
 #clock{
     font-size:18px;
     color:#00ffff;
     font-weight:bold;
-    animation: blink 1s infinite;  /* Yanıp sönme efekti */
+    animation: blink 1s infinite;
     text-align:center;
 }
-
-/* --- Yanıp sönme animasyonu --- */
 @keyframes blink{
     0%{opacity:1;}
     50%{opacity:0.4;}
     100%{opacity:1;}
 }
-
-/* --- Çerçeve ışık puls efekti --- */
 @keyframes pulseGlow{
     0%{box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff inset;}
     50%{box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff inset;}
@@ -116,7 +102,7 @@ body{
     justify-content:center;
     width:100%;
     gap:6px;
-    background: rgba(0,0,0,0.7); /* %70 şeffaf siyah */
+    background: rgba(0,0,0,0.7);
     color:#fff;
     padding:15px;
     border-radius:25px;
@@ -134,19 +120,39 @@ body{
 
 /* --- Alt sponsor alanı --- */
 .ad-area{
-    margin-top:25px;width:100%;max-width:600px;
+    margin-top: 25px;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
 }
 .ad-area a{
-    display:block;width:100%;background: rgba(0,0,0,0.7); /* %70 şeffaf siyah */
+    display:block;
+    width:100%;
+    background: rgba(0,0,0,0.7);
     border-radius:12px;
     overflow:hidden;
-    text-decoration:none;color:white;
-    transition: .3s;
+    text-decoration:none;
+    color:white;
+    transition:.3s;
+    position: relative;
+    z-index:2;
 }
 .ad-box{
-    position:relative;display:block;background: rgba(0,0,0,0.7);border:2px solid #d4af37;border-radius:18px;padding:30px 20px;text-align:center;overflow:hidden;transition:.4s;
+    position:relative;
+    display:block;
+    background: rgba(0,0,0,0.7);
+    border:2px solid #d4af37;
+    border-radius:18px;
+    padding:30px 20px;
+    text-align:center;
+    overflow:hidden;
+    transition:.4s;
 }
-.ad-box:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(212,175,55,.4);}
+.ad-box:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 40px rgba(212,175,55,.4);
+}
 .ad-logo{width:95px;margin:25px 0 10px 0;border-radius:50%;transition:transform .6s;}
 .ad-box:hover .ad-logo{transform:rotate(8deg) scale(1.05);}
 .ad-box h2{font-size:24px;color:#d4af37;margin-bottom:6px;}
@@ -176,13 +182,10 @@ footer{margin-top:20px;font-size:12px;opacity:.6;}
     <h1>Trabzon 2026 Ramazan İmsakiyesi</h1>
 </div>
 
-<!-- Saat çerçeve ve animasyonlu neon -->
 <div id="clock-wrapper">
     <div id="clock"></div>
 </div>
 <div class="badge" id="badge"></div>
-
-
 
 <!-- Diyanet Butonu -->
 <div class="progress">
@@ -202,7 +205,6 @@ footer{margin-top:20px;font-size:12px;opacity:.6;}
 </a>
 </div>
 
-
 <footer>NRAtölye © 2026</footer>
 
 <script>
@@ -214,8 +216,6 @@ function update(){
 }
 setInterval(update,1000);
 update();
-
-
 
 // --- Arka plan fade slideshow ---
 const slides = document.querySelectorAll('.bg-slide');
