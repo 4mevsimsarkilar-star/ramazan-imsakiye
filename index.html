@@ -13,20 +13,31 @@ body{
     align-items:center;
     padding:15px;
     color:white;
-    /* Siyah zemin + şeffaf gradyan + arka plan resmi */
-    background:
-      linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-      url('trabzon1.jpg') center/cover no-repeat;
-    transition: background 1s ease-in-out;
+   background: rgba(0,0,0,0.7);
+
+    position:relative;
+    overflow:hidden;
 }
 
-/* --- Header ve Logo --- */
+/* --- Arka plan slaytları --- */
+.bg-slide{
+    position:fixed;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    opacity:0;
+    transition: opacity 2s ease-in-out;
+    z-index:-2;
+}
+
+/* --- Üst header ve Logo --- */
 .header-bar{
     display:flex;
     align-items:center;
     gap:15px;
     padding:10px 20px;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.7);
+
     border: 2px solid #d4af37; 
     border-radius:15px;
     margin-bottom:15px;
@@ -35,7 +46,8 @@ body{
     justify-content:center;
     position: relative;
     overflow: hidden;
-    transition: background 2s linear;
+    transition: background 1s linear;
+    z-index:1;
 }
 .header-bar > *{position: relative; z-index:1;}
 .logo{
@@ -48,19 +60,23 @@ body{
 .header-bar h1{font-size:22px;color:white;margin:0;white-space: nowrap;text-align:center;}
 
 /* --- Saat ve badge --- */
-#clock{margin-bottom:10px;font-size:14px;opacity:.8;}
+#clock{margin-bottom:10px;font-size:14px;opacity:.9;}
 .badge{background:linear-gradient(45deg,#d4af37,#ffcc66);color:#000;padding:6px 14px;border-radius:20px;font-weight:bold;margin-bottom:15px;text-align:center;}
 
 /* --- Diyanet Butonu --- */
-.progress{width:100%;max-width:500px;margin-bottom:25px;}
+.progress{
+    width:100%;
+    max-width:500px;
+    margin-bottom:25px;
+}
 .progress .btn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
     width:100%;
     gap:6px;
-    background:#d4af37;
-    color:#000;
+    background: rgba(0,0,0,0.7); /* %70 şeffaf siyah */
+    color:#fff;
     padding:15px;
     border-radius:25px;
     font-weight:bold;
@@ -70,7 +86,7 @@ body{
     text-align:center;
 }
 .progress .btn:hover{
-    background:#fff;
+    background: rgba(0,0,0,0.85);
     box-shadow:0 0 15px #d4af37, 0 0 30px #00ffff inset;
     transform:scale(1.05);
 }
@@ -80,10 +96,14 @@ body{
     margin-top:25px;width:100%;max-width:600px;
 }
 .ad-area a{
-    display:block;width:100%;background:#111;border-radius:12px;overflow:hidden;text-decoration:none;color:white;
+    display:block;width:100%;background: rgba(0,0,0,0.7); /* %70 şeffaf siyah */
+    border-radius:12px;
+    overflow:hidden;
+    text-decoration:none;color:white;
+    transition: .3s;
 }
 .ad-box{
-    position:relative;display:block;background:#111;border:2px solid #d4af37;border-radius:18px;padding:30px 20px;text-align:center;overflow:hidden;transition:.4s;
+    position:relative;display:block;background: rgba(0,0,0,0.7);border:2px solid #d4af37;border-radius:18px;padding:30px 20px;text-align:center;overflow:hidden;transition:.4s;
 }
 .ad-box:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(212,175,55,.4);}
 .ad-logo{width:95px;margin:25px 0 10px 0;border-radius:50%;transition:transform .6s;}
@@ -95,6 +115,20 @@ footer{margin-top:20px;font-size:12px;opacity:.6;}
 </style>
 </head>
 <body>
+
+<!-- Arka plan slayt container -->
+<div id="bg-container">
+    <div class="bg-slide" style="background-image:url('trabzon1.jpg');"></div>
+    <div class="bg-slide" style="background-image:url('trabzon2.jpg');"></div>
+    <div class="bg-slide" style="background-image:url('trabzon3.jpg');"></div>
+    <div class="bg-slide" style="background-image:url('trabzon4.jpg');"></div>
+    <div class="bg-slide" style="background-image:url('trabzon5.jpg');"></div>
+    <div class="bg-slide" style="background-image:url('trabzon6.jpg');"></div>
+    <div class="bg-slide" style="background-image:url('trabzon7.jpg');"></div>
+    <div class="bg-slide" style="background-image:url('trabzon8.jpg');"></div>
+    <div class="bg-slide" style="background-image:url('trabzon9.jpg');"></div>
+    <div class="bg-slide" style="background-image:url('trabzon10.jpg');"></div>
+</div>
 
 <div class="header-bar">
     <img src="logo.png" class="logo">
@@ -148,18 +182,15 @@ function updateHeaderGradient() {
 setInterval(updateHeaderGradient,60000);
 updateHeaderGradient();
 
-// --- Arka plan slideshow (5 saniye geçiş) ---
-const backgrounds = [
-    'trabzon1.jpg','trabzon2.jpg','trabzon3.jpg','trabzon4.jpg','trabzon5.jpg',
-    'trabzon6.jpg','trabzon7.jpg','trabzon8.jpg','trabzon9.jpg','trabzon10.jpg'
-];
-let currentBG = 0;
-function changeBackground(){
-    document.body.style.background = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${backgrounds[currentBG]}') center/cover no-repeat`;
-    currentBG = (currentBG + 1) % backgrounds.length;
-}
-setInterval(changeBackground,5000); // 5 saniye
-changeBackground();
+// --- Arka plan fade slideshow ---
+const slides = document.querySelectorAll('.bg-slide');
+let current = 0;
+slides[current].style.opacity = 1;
+setInterval(()=>{
+    slides[current].style.opacity = 0;
+    current = (current + 1) % slides.length;
+    slides[current].style.opacity = 1;
+},5000); // 5 saniye
 </script>
 
 </body>
